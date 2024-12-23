@@ -13,8 +13,13 @@
 <body>
     <h1 class="text-center p-3">ola mundo</h1>
     <div class="container-fluid row">
-        <form class="col-4 p-3">
+        <form class="col-4 p-3" method="POST">
             <h3 class="text-center text-secondary">Registro de personas</h3>
+            <!-- este php es para poder mostrar los mensajes de error -->
+            <?php 
+                include("model/conexion.php");
+                include("controller/registro_persona.php");
+            ?>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nombre de la persona</label>
                 <input type="text" class="form-control" name="nombre">

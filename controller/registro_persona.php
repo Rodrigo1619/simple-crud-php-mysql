@@ -13,7 +13,7 @@
             $sql=$conexion->query("INSERT INTO PERSONA (nombre,apellido,dni,fecha_nac,correo) VALUES ('$nombre', '$apellido', '$dni', '$fecha', '$correo')");
             /* ver si realmente se registro */
             if($sql==1){
-                echo '<div class="alert alert-success"> Registro exitoso </div>';
+                /* echo '<div class="alert alert-success"> Registro exitoso </div>'; */
                 /* que no se duplique el ultimo registro a la hora de recargar la pgaina */
                 header("Location: {$_SERVER['PHP_SELF']}?success=1");
                 exit();

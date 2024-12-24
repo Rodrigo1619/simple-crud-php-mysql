@@ -7,11 +7,23 @@
     <title>Crud php-mysql</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="utils/eliminar.js"></script>
 
 </head>
 
 <body>
     <h1 class="text-center p-3">Formulario para el registro de personas</h1>
+    <!-- llamando al controlador de eliminar personas -->
+    <?php
+    /* llamando a la conexion de la bd */
+        include("model/conexion.php");
+        include("controller/eliminar_persona.php");
+
+        // Mostrar mensaje de éxito si el registro fue exitoso
+        if (isset($_GET['success']) && $_GET['success'] == 1) {
+            echo '<div class="alert alert-success"> Registro exitoso </div>';
+        }
+    ?>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="POST">
             <h3 class="text-center text-secondary">Registro de personas</h3>
@@ -78,7 +90,7 @@
                         <td>
                             <!-- cuando nos mande a modificar_persona le decimos que nos mande el id -->
                             <a href="view/modificar_persona.php?id=<?= $datos->id_persona ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a onclick="return eliminar()" href="index.php?id=<?= $datos->id_persona ?>" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>
                     <?php }

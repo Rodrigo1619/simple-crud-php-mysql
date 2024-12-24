@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <h1 class="text-center p-3">ola mundo</h1>
+    <h1 class="text-center p-3">Formulario para el registro de personas</h1>
     <div class="container-fluid row">
         <form class="col-4 p-3" method="POST">
             <h3 class="text-center text-secondary">Registro de personas</h3>
@@ -76,7 +76,8 @@
                         <td><?= $datos->fecha_nac ?></td>
                         <td><?= $datos->correo ?></td>
                         <td>
-                            <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <!-- cuando nos mande a modificar_persona le decimos que nos mande el id -->
+                            <a href="view/modificar_persona.php?id=<?= $datos->id_persona ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

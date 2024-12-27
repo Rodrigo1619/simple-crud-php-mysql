@@ -57,6 +57,19 @@
                 <input type="text" class="form-control" name="correo">
             </div>
 
+            <div class="mb-3">
+                <label for="pais" class="form-label">País</label>
+                <select class="form-control" name="id_pais" id="pais">
+                    <option value="">Seleccione un país</option>
+                        <?php
+                            $queryPaises = $conexion->query("SELECT * FROM PAIS");
+                            while ($pais = $queryPaises->fetch_object()) {
+                                echo "<option value='$pais->id_pais'>$pais->nombre</option>";
+                            }
+                        ?>
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok">Registrar</button>
         </form>
 
@@ -71,13 +84,14 @@
                         <th scope="col">DNI</th>
                         <th scope="col">FECHA DE NAC</th>
                         <th scope="col">CORREO</th>
+                        <th scope="col">PAIS</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     include("model/conexion.php");
-                    $sql=$conexion->query("SELECT * FROM persona");
+                    $sql=$conexion->query("SELECT pers.*, pai.nombre AS nombre_pais FROM persona pers LEFT JOIN pais pai ON pers.id_pais = pai.id_pais");
                     /* para poder recorrer todos los registros */
                     while($datos=$sql->fetch_object()){?>
                         <tr>
@@ -87,6 +101,7 @@
                         <td><?= $datos->dni ?></td>
                         <td><?= $datos->fecha_nac ?></td>
                         <td><?= $datos->correo ?></td>
+                        <td><?= $datos->nombre_pais ?></td>
                         <td>
                             <!-- cuando nos mande a modificar_persona le decimos que nos mande el id -->
                             <a href="view/modificar_persona.php?id=<?= $datos->id_persona ?>" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>

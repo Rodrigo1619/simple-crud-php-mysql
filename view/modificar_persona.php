@@ -5,7 +5,10 @@ $id=$_GET["id"];
 
 /* traer toda la informacion segun el id */
 
-$sql=$conexion->query("SELECT * FROM PERSONA WHERE id_persona=$id");
+$sql=$conexion->query("SELECT PERS.*, PAI.nombre AS nombre_pais 
+                                FROM PERSONA PERS 
+                                LEFT JOIN PAIS PAI ON PERS.id_pais = PAI.id_pais 
+                                WHERE PERS.id_persona = $id");
 ?>
 
 <!-- Formulario -->
@@ -52,6 +55,21 @@ $sql=$conexion->query("SELECT * FROM PERSONA WHERE id_persona=$id");
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Correo</label>
                         <input type="text" class="form-control" name="correo" value="<?=$datos->correo ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pais" class="form-label">País</label>
+                        <select class="form-control" name="id_pais" id="pais">
+                            <option value="">Seleccione un país</option>
+                                <?php
+                                    $queryPaises = $conexion->query("SELECT * FROM PAIS");
+                                    while ($pais = $queryPaises->fetch_object()) {
+                                        $selected = ($pais->id_pais == $datos->id_pais) ? "selected" : "";
+                                        echo "<option value='$pais->id_pais' $selected>$pais->nombre</option>";
+
+                                    }
+                                ?>
+                        </select>
                     </div>
                 <?php }
             ?>
